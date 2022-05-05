@@ -1,0 +1,15 @@
+class Solution {
+public:
+    int maxProfit(vector<int>& p) {
+        int n=p.size(), mini=p[0], maxi=INT_MIN;
+        
+        for(int i=1;i<n;i++){
+            if(p[i]<mini)
+                mini=p[i];
+            maxi = max(maxi, p[i]-mini);
+        }
+        return maxi;
+    }
+};
+
+https://leetcode.com/problems/best-time-to-buy-and-sell-stock/submissions/
