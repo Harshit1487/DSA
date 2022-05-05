@@ -1,0 +1,28 @@
+class Solution {
+public:
+    void setZeroes(vector<vector<int>>& matrix) {
+        int r=matrix.size(), c=matrix[0].size();
+        
+        vector<int> setr(r, 1);
+        vector<int> setc(c, 1);
+        
+        for(int i=0;i<r;i++){
+            for(int j=0;j<c;j++){
+                if(matrix[i][j]==0){
+                    setr[i]=0;
+                    setc[j]=0;
+                }
+            }
+        }
+        
+        for(int i=0;i<r;i++){
+            for(int j=0;j<c;j++){
+                if(setr[i]==0 or setc[j]==0)
+                    matrix[i][j]=0;
+            }
+        }
+        
+    }
+};
+
+https://leetcode.com/problems/set-matrix-zeroes/
