@@ -1,0 +1,22 @@
+class Solution {
+public:
+    int maxScore(vector<int>& c, int k) {
+        int lsum = 0, rsum=0, n=c.size();
+        
+        for(int i=0;i<k;i++)
+            lsum+=c[i];
+        
+        int res=lsum;
+        
+        for(int i=0;i<k;i++){
+            rsum += c[n-1-i];
+            lsum -= c[k-1-i];
+            res = max(res, lsum+rsum);
+        }
+        
+        return res;
+    }
+};
+
+
+https://leetcode.com/problems/maximum-points-you-can-obtain-from-cards/
