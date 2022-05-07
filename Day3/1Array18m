@@ -1,0 +1,40 @@
+class Solution {
+public:
+    vector<vector<int>> fourSum(vector<int>& nums, int t) {
+        vector<vector<int>> res;
+        int n=nums.size();
+        if(n==0) return res;
+        
+        sort(nums.begin(), nums.end());
+        
+        for(int i=0;i<n;i++){
+            for(int j=i+1;j<n;j++){
+                int t1 = t - nums[i] - nums[j];
+                int l=j+1, r=n-1;
+                
+                while(l<r){
+                    int s = nums[l]+nums[r];
+                    if(s>t1) r--;
+                    else if(s<t1) l++;
+                    else{
+                        vector<int> ans(4, 0);
+                        ans[0]=nums[i];
+                        ans[1]=nums[j];
+                        ans[2]=nums[l];
+                        ans[3]=nums[r];
+                        res.push_back(ans);
+                        
+                        while(l<r && nums[l]==ans[2]) ++l;
+                        while(l<r && nums[r]==ans[3]) --r;
+                    }
+                }
+                while(i+1<n && nums[i+1]==nums[i]) ++i;
+                while(j+1<n && nums[j+1]==nums[j]) ++j;
+            }
+        }
+        
+        return res;
+    }
+};
+
+https://leetcode.com/problems/4sum/
