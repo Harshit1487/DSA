@@ -1,0 +1,20 @@
+class Solution {
+public:
+    int findMaxValueOfEquation(vector<vector<int>>& po, int k) {
+        priority_queue<pair<int, int>> pq;
+        int ans = INT_MIN;
+        
+        for(int i=0;i<po.size();i++){
+            while((!pq.empty()) && (po[i][0]-pq.top().second>k))
+                pq.pop();
+            if(!pq.empty())
+                ans = max(ans, po[i][1]+po[i][0]+pq.top().first);
+            
+            pq.push({po[i][1]-po[i][0], po[i][0]});
+        }
+        
+        return ans;
+    }
+};
+
+https://leetcode.com/problems/max-value-of-equation/
