@@ -1,0 +1,21 @@
+class Solution {
+public:
+    void solve(int n, int o, int c, string s, vector<string>& res){
+        if(o==n && c==n){
+            res.push_back(s);
+            return;
+        }
+        if(o<n)
+            solve(n, o+1, c, s+'(', res);
+        if(c<o)
+            solve(n, o, c+1, s+')', res);
+        
+    }
+    vector<string> generateParenthesis(int n) {
+        vector<string> res;
+        solve(n, 0, 0, "", res);
+        return res;
+    }
+};
+
+https://leetcode.com/problems/generate-parentheses/
