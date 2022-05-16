@@ -1,0 +1,54 @@
+string smallestWindow (string s, string p)
+    {
+
+        int ns=s.length(), np=p.length();
+        if(np>ns) return "-1";
+        
+        unordered_map<char, int> mps;
+        unordered_map<char, int> mpp;
+        
+        for(int i=0;i<np;i++)
+            mpp[p[i]]++;
+            
+        string ans="";
+        string cur;
+        int i=-1, j=-1, cs=0, cp=p.size();
+        
+        while(true){
+            bool l1=false;
+            bool l2=false;
+            
+            while(cs<cp and i<ns-1){
+                i++;
+                mps[s[i]]++;
+                if(mps[s[i]]<=mpp[s[i]])
+                    cs++;
+                l1=true;
+            }
+            
+            while(j<i and cs==cp){
+                string t = s.substr(j+1, i-(j+1)+1);
+                
+                if(t.length()<ans.length() or ans.length()==0)
+                    ans=t;
+                j++;
+                
+                if(mps[s[j]]==1)
+                    mps.erase(s[j]);
+                else
+                    mps[s[j]]--;
+                    
+                if(mps[s[j]]<mpp[s[j]])
+                    cs--;
+                l2=true;
+            }
+            if(!l1 and !l2)
+                break;
+        }
+        if(ans.length()==0)
+            return "-1";
+        
+        return ans;
+    }
+    
+    https://practice.geeksforgeeks.org/problems/smallest-window-in-a-string-containing-all-the-characters-of-another-string-1587115621/1
